@@ -1,0 +1,29 @@
+{
+  "name": "web3auth-node-solana-quick-start",
+  "version": "1.0.0",
+  "description": "Web3Auth Node.js SDK EVM Quick Start CLI Example",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "node --watch index.js"
+  },
+  "keywords": [
+    "web3auth",
+    "blockchain",
+    "solana",
+    "authentication",
+    "cli"
+  ],
+  "author": "Web3Auth",
+  "license": "MIT",
+  "dependencies": {
+    "@solana/signers": "^3.0.3",
+    "@solana/web3.js": "^1.98.4",
+    "@web3auth/node-sdk": "^5.0.0",
+    "fs": "^0.0.1-security",
+    "jsonwebtoken": "^9.0.2"
+  },
+  "devDependencies": {
+    "@types/node": "^20.8.0"
+  }
+}
