@@ -1,11 +1,11 @@
 # MetaMask Embedded Wallets Node Examples
 
-Node.js CLI examples using `@web3auth/node-sdk` for backend custom-auth flows.
+Node.js CLI examples using `@web3auth/node-sdk` v6 for backend custom-auth flows.
 
 These examples are intentionally minimal and focus on:
 - JWT-based login with `authConnectionId`
 - Wallet reconstruction through Web3Auth Sapphire networks
-- Basic EVM or Solana signing/balance calls
+- Basic EVM (viem) or Solana (@solana/kit) signing/balance calls
 
 ## Examples
 
@@ -14,6 +14,8 @@ These examples are intentionally minimal and focus on:
 - **[Firebase Quick Start](./firebase-quick-start/)**: Firebase ID token -> Web3Auth connect -> EVM calls
 
 ## Quick Start
+
+Requires Node.js 22+.
 
 ```bash
 cd <example-folder>
@@ -37,6 +39,9 @@ npm start
 
 ## Critical Notes
 
+- Requires **Node.js 22+** (`@web3auth/node-sdk` v6).
+- EVM examples use **viem** `WalletClient` signers returned by `connect()`.
+- Solana example uses **@solana/kit** for RPC and message signing.
 - This repo uses **MetaMask Embedded Wallets** docs and APIs (legacy `web3auth.io/docs` links are outdated).
 - Node SDK is backend-only and custom-auth-focused; it does not provide social-login UI.
 - JWTs must be freshly issued; stale `iat` values can fail login.

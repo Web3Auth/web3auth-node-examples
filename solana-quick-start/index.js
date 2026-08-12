@@ -1,7 +1,6 @@
 const jwt = require('jsonwebtoken');
-const { LAMPORTS_PER_SOL, Connection, PublicKey } = require("@solana/web3.js");
+const { address, createSolanaRpc, createSignableMessage, getBase58Decoder } = require("@solana/kit");
 const fs = require("fs").promises;
-const { createSignableMessage } = require('@solana/signers');
 
 // IMP START - Quick Start
 const { Web3Auth } = require("@web3auth/node-sdk");
@@ -21,10 +20,9 @@ const getAccounts = async (signer) => {
 // Get Solana Balance
 const getBalance = async (signer) => {
     try {
-        const publicKey = new PublicKey(signer.address);
-        const connection = new Connection("https://api.devnet.solana.com");
-        const balance = await connection.getBalance(publicKey) / LAMPORTS_PER_SOL;
-        console.log("\x1b[33m%s\x1b[0m", "Balance:", balance, "SOL");
+        const rpc = createSolanaRpc("https://api.devnet.solana.com");
+        const { value } = await rpc.getBalance(address(signer.address)).send();
+        console.log("\x1b[33m%s\x1b[0m", "Balance:", Number(value) / 1_000_000_000, "SOL");
     } catch (error) {
         console.error("\x1b[33m%s\x1b[0m", "Error fetching balance:", error);
     }
@@ -33,13 +31,8 @@ const getBalance = async (signer) => {
 // Sign Solana Message
 const signMessage = async (signer, message) => {
     try {
-
-        const messageBytes = new TextEncoder().encode(message);
-
-        // Create a SignableMessage object from Uint8Array
-        const signableMessage = createSignableMessage(messageBytes);
-
-        const [signature] = await signer.signMessages([signableMessage]);
+        const [signatures] = await signer.signMessages([createSignableMessage(message)]);
+        const signature = getBase58Decoder().decode(signatures[signer.address]);
         console.log("\x1b[33m%s\x1b[0m", "Signed Message:", signature);
     } catch (error) {
         console.error("\x1b[33m%s\x1b[0m", "Error signing message:", error);

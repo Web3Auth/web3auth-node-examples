@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken');
-const { ethers } = require("ethers");
+const { publicActions, formatEther } = require("viem");
 const fs = require("fs").promises;
 
 // IMP START - Quick Start
@@ -8,10 +8,9 @@ const { Web3Auth } = require("@web3auth/node-sdk");
 
 // IMP START - Blockchain Calls
 // Get Ethereum Accounts
-const getAccounts = async (signer ) => {
+const getAccounts = async (signer) => {
     try {
-        const address = await signer.getAddress();
-        console.log("\x1b[33m%s\x1b[0m", "Accounts:", address);
+        console.log("\x1b[33m%s\x1b[0m", "Accounts:", signer.account.address);
     } catch (error) {
         console.error("\x1b[33m%s\x1b[0m", "Error fetching accounts:", error);
     }
@@ -20,20 +19,18 @@ const getAccounts = async (signer ) => {
 // Get Ethereum Balance
 const getBalance = async (signer) => {
     try {
-        const address = await signer.getAddress();
-        const balance = ethers.formatEther(
-            await signer.provider.getBalance(address) // Balance is in wei
-          );
-        console.log("\x1b[33m%s\x1b[0m", "Balance:", balance, "ETH");
+        const client = signer.extend(publicActions);
+        const balance = await client.getBalance({ address: signer.account.address });
+        console.log("\x1b[33m%s\x1b[0m", "Balance:", formatEther(balance), "ETH");
     } catch (error) {
         console.error("\x1b[33m%s\x1b[0m", "Error fetching balance:", error);
     }
 };
 
 // Sign Ethereum Message
-const signMessage = async (signer, message) => {    
+const signMessage = async (signer, message) => {
     try {
-        const signature = await signer.signMessage(message);
+        const signature = await signer.signMessage({ account: signer.account, message });
         console.log("\x1b[33m%s\x1b[0m", "Signed Message:", signature);
     } catch (error) {
         console.error("\x1b[33m%s\x1b[0m", "Error signing message:", error);

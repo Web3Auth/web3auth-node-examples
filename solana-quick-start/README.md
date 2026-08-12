@@ -1,6 +1,6 @@
 # Node SDK Solana Quick Start
 
-CLI demo for `@web3auth/node-sdk` using custom JWT authentication and Solana signing with `@solana/web3.js`.
+CLI demo for `@web3auth/node-sdk` using custom JWT authentication and Solana signing with `@solana/kit`.
 
 ## What This Example Does
 
@@ -14,6 +14,8 @@ The script in `index.js`:
   - sign a message
 
 ## Run
+
+Requires Node.js 22+.
 
 ```bash
 cd solana-quick-start
@@ -48,7 +50,7 @@ Then update values in `index.js`:
 
 ## Solana-Specific Notes
 
-- The sample balance check uses Solana RPC `https://api.devnet.solana.com`.
+- The sample balance check uses `@solana/kit` RPC against `https://api.devnet.solana.com`.
 - Sapphire network (`sapphire_devnet` / `sapphire_mainnet`) is separate from Solana devnet/mainnet.
 - You can test Solana devnet while still using a specific Sapphire environment for key derivation.
 

@@ -1,6 +1,6 @@
 # Node SDK Firebase Quick Start
 
-CLI demo that uses a Firebase ID token as the custom JWT for `@web3auth/node-sdk`, then performs EVM signer operations.
+CLI demo that uses a Firebase ID token as the custom JWT for `@web3auth/node-sdk`, then performs EVM signer operations with `viem`.
 
 ## What This Example Does
 
@@ -9,12 +9,14 @@ The script in `index.js`:
 - Fetches Firebase `idToken` from the authenticated user
 - Initializes `Web3Auth` with `clientId` and `web3AuthNetwork`
 - Calls `web3auth.connect({ authConnectionId, idToken })`
-- Uses the returned EVM signer to:
+- Uses the returned viem `WalletClient` signer to:
   - print account address
   - fetch ETH balance
   - sign a message
 
 ## Run
+
+Requires Node.js 22+.
 
 ```bash
 cd firebase-quick-start

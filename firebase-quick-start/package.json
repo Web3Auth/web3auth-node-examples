@@ -1,7 +1,7 @@
 {
   "name": "web3auth-node-firebase-quick-start",
   "version": "1.0.0",
-  "description": "Web3Auth Node.js SDK EVM Quick Start CLI Example",
+  "description": "Web3Auth Node.js SDK Firebase Quick Start CLI Example",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
@@ -12,17 +12,21 @@
     "blockchain",
     "ethereum",
     "evm",
+    "firebase",
     "authentication",
     "cli"
   ],
   "author": "Web3Auth",
   "license": "MIT",
+  "engines": {
+    "node": ">=22"
+  },
   "dependencies": {
-    "@web3auth/node-sdk": "^5.0.0",
-    "ethers": "^6.15.0",
-    "firebase": "^12.3.0"
+    "@web3auth/node-sdk": "^6.0.0",
+    "firebase": "^12.17.1",
+    "viem": "^2.55.13"
   },
   "devDependencies": {
-    "@types/node": "^20.8.0"
+    "@types/node": "^24"
   }
 }

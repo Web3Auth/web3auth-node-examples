@@ -1,6 +1,6 @@
 # Node SDK EVM Quick Start
 
-CLI demo for `@web3auth/node-sdk` using custom JWT authentication and EVM signing with `ethers`.
+CLI demo for `@web3auth/node-sdk` using custom JWT authentication and EVM signing with `viem`.
 
 ## What This Example Does
 
@@ -8,12 +8,14 @@ The script in `index.js`:
 - Initializes `Web3Auth` with a `clientId` and `web3AuthNetwork`
 - Creates a JWT (RS256) from `privateKey.pem`
 - Calls `web3auth.connect({ authConnectionId, idToken })`
-- Uses the returned EVM signer to:
+- Uses the returned viem `WalletClient` signer to:
   - print account address
   - fetch ETH balance
   - sign a message
 
 ## Run
+
+Requires Node.js 22+.
 
 ```bash
 cd evm-quick-start
